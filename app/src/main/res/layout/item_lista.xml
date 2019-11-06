@@ -3,22 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="75dp"
-    tools:context=".ItemLista">
+    android:name=".ItemLista"
+    android:parentActivityName=".MainActivity">
+
+    <meta-data
+        android:name="android.support.PARENT_ACTIVITY"
+        android:value=".MainActivity" />
 
     <TextView
-        android:id="@+id/numero"
-        android:layout_width="180dp"
-        android:layout_height="match_parent"
-        android:layout_marginStart="20dp"
-        android:hint="ID"
-        android:textSize="40dp"></TextView>
-
-    <TextView
-        android:id="@+id/quantidade"
-        android:layout_width="180dp"
+        android:id="@+id/itemSelecionado"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginEnd="20dp"
-        android:layout_toRightOf="@+id/numero"
         android:hint="Item"
         android:textSize="40dp"></TextView>
 </RelativeLayout>
