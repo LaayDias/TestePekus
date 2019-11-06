@@ -1,6 +1,8 @@
 package com.example.testepekus;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -12,20 +14,25 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Integer contador = 0, x;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ListView lista = findViewById(R.id.lista);
+        ListView lista = (ListView) findViewById(R.id.lista);
 
-        ArrayList<String> numeros = preencherNumeros();
+        final ArrayList<String> equipes = preencherNumeros();
 
-        ArrayAdapter<String> arrayAdapter= new ArrayAdapter<String>(this, R.layout.item_lista);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1  , equipes);
         lista.setAdapter(arrayAdapter);
 
+        lista.OnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getApplicationContext(), "Numero " + equipes.get(position).toString(),Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     private ArrayList<String> preencherNumeros() {
@@ -36,5 +43,6 @@ public class MainActivity extends AppCompatActivity {
         dados.add("Informação 4");
         return dados;
     }
+
 
 }
