@@ -2,8 +2,8 @@ package com.example.testepekus;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -15,26 +15,41 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
 
+    private Integer[] tamanho;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ListView lista = (ListView) findViewById(R.id.lista);
+        ListView lista = findViewById(R.id.lista);
+        final EditText numDigitado = findViewById(R.id.edtNumero);
+        Button btnPesquisar = findViewById(R.id.bntPesquisar);
+        final ArrayList<String> numerosArray = preencherNumeros();
 
-        final ArrayList<String> equipes = preencherNumeros();
-
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1  , equipes);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, numerosArray);
         lista.setAdapter(arrayAdapter);
 
-        lista.OnItemClickListener(new AdapterView.OnItemClickListener() {
+        //capturando valor digitado pelo usuário
+        btnPesquisar.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(), "Numero " + equipes.get(position).toString(),Toast.LENGTH_LONG).show();
+            public void onClick(View v) {
+                int number = Integer.valueOf(numDigitado.getText().toString());
+                Toast.makeText(getApplicationContext(), "numero " + number, Toast.LENGTH_SHORT).show();
             }
         });
+
+
+        //erro no lista???
+       /* lista.OnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getApplicationContext(), "Numero " + numerosArray.get(position).toString(),Toast.LENGTH_LONG).show();
+            }
+        });*/
     }
 
+    //valores exibidos na lista
     private ArrayList<String> preencherNumeros() {
         ArrayList<String> dados = new ArrayList<String>();
         dados.add("Informação 1");
