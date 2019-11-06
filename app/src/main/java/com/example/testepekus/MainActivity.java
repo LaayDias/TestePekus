@@ -2,6 +2,7 @@ package com.example.testepekus;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,9 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    ArrayList<String> dados = new ArrayList<String>();
 
-
-    private Integer[] tamanho;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,44 +27,45 @@ public class MainActivity extends AppCompatActivity {
         Button btnPesquisar = findViewById(R.id.bntPesquisar);
         final ArrayList<String> numerosArray = preencherNumeros();
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, numerosArray);
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, numerosArray);
         lista.setAdapter(arrayAdapter);
 
         //capturando valor digitado pelo usuário
         btnPesquisar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (numDigitado.getText().toString().isEmpty() || numDigitado.getText() == null) {
+                    Toast.makeText(MainActivity.this, "nao pode ficar em branco", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 int number = Integer.valueOf(numDigitado.getText().toString());
-                Toast.makeText(getApplicationContext(), "numero " + number, Toast.LENGTH_SHORT).show();
+
+                for (int i = 0; i < number; i++) {
+                    int showNumber = i + 1;
+                    dados.add("0000" + showNumber + "– Item " + showNumber);
+                }
+                arrayAdapter.clear();
+                arrayAdapter.addAll(dados);
             }
         });
-        //erro no lista???
-        //primeiro metodo capturar evento de click na lista
-       /* lista.setOnClickListener(new AdapterView.OnItemClickListener() {
+        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Object listItem = lista.getItemAtPosition(position);
+            public void onItemClick(AdapterView<?> arg0, View child, int position,
+                                    long adapterPositon) {
+
+                String item = dados.get(position);
+
+                Toast.makeText(MainActivity.this, "voce clicou faz algo " + item, Toast.LENGTH_SHORT).show();
             }
+
         });
-    */
-        //segundo metodo capturar evento de click na lista
-        /*lista.OnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(), "Numero " + numerosArray.get(position).toString(),Toast.LENGTH_LONG).show();
-            }
-        });*/
-    }
-
-        //valores exibidos na lista
-        private ArrayList<String> preencherNumeros () {
-            ArrayList<String> dados = new ArrayList<String>();
-            dados.add("Informação 1");
-            dados.add("Informação 2");
-            dados.add("Informação 3");
-            dados.add("Informação 4");
-            return dados;
-        }
-
 
     }
+
+    //valores exibidos na lista
+    private ArrayList<String> preencherNumeros() {
+        return new ArrayList<>();
+    }
+
+}
