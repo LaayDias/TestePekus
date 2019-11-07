@@ -68,13 +68,12 @@ public class MainActivity extends AppCompatActivity {
 
                 String item = dados.get(position);
 
-                Toast.makeText(MainActivity.this,
-                        "voce clicou faz algo " + item, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this,"voce clicou faz algo " + item, Toast.LENGTH_SHORT).show();
 
-               /* Intent intent = new Intent(MainActivity.this, ItemLista.class);
-
-                intent.putExtra("item",  item);
-                startActivity(intent);*/
+                //Abrindo item selecionado
+                Intent intent = new Intent(MainActivity.this, ItemLista.class);
+                intent.putExtra("item", item);
+                startActivity(intent);
             }
 
         });

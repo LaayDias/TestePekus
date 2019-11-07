@@ -6,9 +6,6 @@
     android:name=".ItemLista"
     android:parentActivityName=".MainActivity">
 
-    <meta-data
-        android:name="android.support.PARENT_ACTIVITY"
-        android:value=".MainActivity" />
 
     <TextView
         android:id="@+id/itemSelecionado"
@@ -17,4 +14,6 @@
         android:layout_marginEnd="20dp"
         android:hint="Item"
         android:textSize="40dp"></TextView>
+
+
 </RelativeLayout>

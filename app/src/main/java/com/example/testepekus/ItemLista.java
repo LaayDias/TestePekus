@@ -12,14 +12,12 @@ public class ItemLista extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.item_lista);
 
-/*
 
         Intent intent = getIntent();
 
-        String message = intent.getStringExtra(MainActivity);
-
+        String message = intent.getStringExtra("item");
         TextView itemSelecionado = findViewById(R.id.itemSelecionado);
 
-        itemSelecionado.setText(message);*/
+        itemSelecionado.setText(message);
     }
 }
